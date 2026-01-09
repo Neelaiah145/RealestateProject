@@ -1,8 +1,5 @@
 
-__pycache__/
-*.pyc
-venv/git add .gitignore
 db.sqlite3
-.env
+.myvenv
 
 
