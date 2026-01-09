@@ -53,11 +53,14 @@ def login_view(request):
 # =========================
 # LOGOUT
 # =========================
+
 @login_required
 def logout_view(request):
     auth_logout(request)
     return redirect('login')
 
+
+# chnage the images
 @login_required
 def change_superuser_image(request):
     if not request.user.is_superuser:
@@ -80,6 +83,7 @@ def change_superuser_image(request):
 
 
 # ====================================================================================================
+# admin dashboard 
 @login_required
 def dashboard_view(request):
     user = request.user
@@ -114,6 +118,8 @@ def analytics(request):
     return render(request,'pages/analytics.html',{'page_title':'Analytics'})
 
 
+
+# used for toggle mean status in agent/associate
 @login_required
 def toggle_user_status(request, user_id):
     if not request.user.is_superuser:
@@ -125,6 +131,9 @@ def toggle_user_status(request, user_id):
     return redirect("dashboard") 
 
 
+
+
+# delete the agent/associate in admin page
 @login_required
 def delete_user(request, user_id):
     if not request.user.is_superuser:
@@ -135,7 +144,11 @@ def delete_user(request, user_id):
 
 
 
-
+# base file for html code to use all html files
 
 def base(request):
     return render(request,'base.html')
+
+
+
+# agent dashboard
