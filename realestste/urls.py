@@ -18,7 +18,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from accounts.views import   login_view,logout_view,analytics,dashboard_view,change_superuser_image,base
+from accounts.views import   login_view,logout_view,analytics,dashboard_view,change_superuser_image,base,toggle_user_status
+from accounts.views import delete_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +29,9 @@ urlpatterns = [
     path('dashboard/',dashboard_view,name='dashboard'),
     path('analytics/',analytics,name='analytics'),
     path('superuser/change-image/', change_superuser_image, name="change_superuser_image"),
-    path('base/',base,name='base')
+    path('base/',base,name='base'),
+    path("user/status/<int:user_id>/", toggle_user_status, name="toggle-user"),
+    path("user/delete/<int:user_id>/", delete_user, name="delete-user"),
 
     
     

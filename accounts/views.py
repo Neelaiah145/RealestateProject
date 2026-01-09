@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 import os
-
+User = get_user_model()
 # =========================
 # REDIRECT BASED ON USER
 # =========================
@@ -39,24 +40,27 @@ def login_view(request):
 # =========================
 # DASHBOARDS
 # =========================
-@login_required
-def admin_dashboard(request):
-    return render(request, 'admin/dashboard.html')
+# @login_required
+# def admin_dashboard(request):
+#     return render(request, 'admin/dashboard.html')
 
 
-@login_required
-def user_dashboard(request):
-    return render(request, 'pages/analytics.html')
+# @login_required
+# def user_dashboard(request):
+#     return render(request, 'pages/analytics.html')
 
 
 # =========================
 # LOGOUT
 # =========================
+
 @login_required
 def logout_view(request):
     auth_logout(request)
     return redirect('login')
 
+
+# chnage the images
 @login_required
 def change_superuser_image(request):
     if not request.user.is_superuser:
@@ -79,9 +83,35 @@ def change_superuser_image(request):
 
 
 # ====================================================================================================
+# admin dashboard 
 @login_required
 def dashboard_view(request):
-    return render(request,'admin/dashboard.html')
+    user = request.user
+
+    if user.is_superuser:
+        users = User.objects.exclude(role=User.Role.SUPERUSER)
+    else:
+        users = None  # agents cannot see others
+
+    if request.method == "POST" and user.is_superuser:
+        User.objects.create_user(
+            email=request.POST["email"],
+            password=request.POST["password"],
+            username=request.POST["username"],
+            phone=request.POST.get("phone"),
+            role=request.POST["role"]
+        )
+        messages.success(request, "User created successfully")
+        return redirect("dashboard")
+
+    context = {
+        "users": users,
+        "is_admin": user.is_superuser
+    }
+
+    return render(request, "admin/dashboard.html", context)
+
+
 
 @login_required
 def analytics(request):
@@ -89,5 +119,36 @@ def analytics(request):
 
 
 
+# used for toggle mean status in agent/associate
+@login_required
+def toggle_user_status(request, user_id):
+    if not request.user.is_superuser:
+        return redirect("dashboard")
+
+    u = get_object_or_404(User, id=user_id)
+    u.is_active = not u.is_active
+    u.save()
+    return redirect("dashboard") 
+
+
+
+
+# delete the agent/associate in admin page
+@login_required
+def delete_user(request, user_id):
+    if not request.user.is_superuser:
+        return redirect("dashboard")
+
+    get_object_or_404(User, id=user_id).delete()
+    return redirect("dashboard")
+
+
+
+# base file for html code to use all html files
+
 def base(request):
     return render(request,'base.html')
+
+
+
+# agent dashboard

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <title>Realestate Dashboard</title>
-    <link rel="icon" type="image/png" href="{% static 'dash/assets/images/pagelogo.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'dash/assets/images/icons/nav_img.png' %}">
     <script src="{% static 'dash/assets/script/unpkg.com/lucide%400.562.0/dist/umd/lucide.js' %}"></script>
     <script src="{% static 'dash/assets/script/cdn.jsdelivr.net/npm/chart.js' %}"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -29,7 +29,7 @@
                             src="{% static 'dash/assets/images/icons/nav_img.png' %}" alt="pageLogo"
                             class="h-full w-full object-cover" /></div>
                     <div class="flex flex-col"><a href="index.html" class="text-xl font-bold text-text">Realestate</a>
-                        
+
                         <p class="text-xs text-muted">Dashboard</p>
                     </div>
                 </div>
@@ -166,22 +166,27 @@
     </aside>
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <main class="main-content">
+
         <header class="header">
             <div class="xl:py-4">
                 <div class="flex items-center justify-between gap-4 flex-nowrap w-full">
-                    <div class="flex items-center gap-3 shrink-0"><button
-                            class="btn-icon customXl:hidden! opacity-100! flex! pointer-events-auto!"
-                            id="mobile-menu-toggle"><i data-lucide="menu"
-                                class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"></i></button>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <button class="btn-icon customXl:hidden! opacity-100! flex! pointer-events-auto!"
+                            id="mobile-menu-toggle">
+                            <i data-lucide="menu" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"></i>
+                        </button>
+
                         <div class="hidden sm:flex flex-col leading-tight">
-                             <h2 class="text-lg sm:text-xl md:text-2xl font-bold truncate max-w-[200px] capitalize">
+                            <h2 class="text-lg sm:text-xl md:text-2xl font-bold truncate max-w-[200px] capitalize">
                                 {{ page_title|default:"Dashboard" }}
                             </h2>
-                            <p class="text-xs sm:text-sm text-muted truncate max-w-[120px] sm:max-w-40]">Monitor
-                                finances</p>
+                            <p class="text-xs sm:text-sm text-muted truncate max-w-[120px] sm:max-w-40]">
+                                Monitor finances
+                            </p>
                         </div>
-
                     </div>
+
+                    <!-- RIGHT SIDE (UNCHANGED) -->
                     <div class="flex items-center gap-3 flex-nowrap ml-auto">
                         <div class="relative hidden md:block"><input placeholder="Search..."
                                 class="w-64 pl-10 pr-4 py-3.5 border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -189,7 +194,8 @@
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg></div>
+                                </svg>
+                            </div>
                         </div>
                         <div class="relative"><input type="checkbox" id="notif-toggle" class="hidden peer" />
                             <label for="notif-toggle" class="btn-icon relative shrink-0 hover:text-rose-500"
@@ -260,8 +266,8 @@
                                     <img src="{{ request.user.profile_image.url }}?v={{ request.user.id }}"
                                         alt="Profile" class="w-full h-full object-cover">
                                     {% else %}
-                                    <img src="{% static 'dash/assets/images/icons/user_img.png' %}" alt="Default Profile"
-                                        class="w-full h-full object-cover">
+                                    <img src="{% static 'dash/assets/images/icons/user_img.png' %}"
+                                        alt="Default Profile" class="w-full h-full object-cover">
                                     {% endif %}
                                 </span>
                             </label>
@@ -275,6 +281,8 @@
                                 <div class="p-4 border-b border-border">
                                     <p class="font-medium text-text">{{ request.user.username }}</p>
                                     <p class="text-sm text-muted">{{ request.user.email }}</p>
+                                   
+                                    <p class="font-semibold capitalize text-text">Role: {{ request.user.role }}</p>
                                 </div>
 
                                 <ul class="py-2">
@@ -332,14 +340,19 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </header>
 
 
-       
+        <section class="p-6">
+            {% block content %}{% endblock %}
+        </section>
+
+    </main>
+
+
     <script
         src="{% static 'dash/assets/script/cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js' %}"></script>
     <script src="{% static 'dash/assets/script/cdn.jsdelivr.net/npm/xlsx%400.18.5/dist/xlsx.full.min.js' %}"></script>
