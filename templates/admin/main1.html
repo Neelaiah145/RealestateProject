@@ -29,7 +29,7 @@
                             src="{% static 'dash/assets/images/icons/nav_img.png' %}" alt="pageLogo"
                             class="h-full w-full object-cover" /></div>
                     <div class="flex flex-col"><a href="index.html" class="text-xl font-bold text-text">Realestate</a>
-                        
+
                         <p class="text-xs text-muted">Dashboard</p>
                     </div>
                 </div>
@@ -259,8 +259,8 @@
                                     <img src="{{ request.user.profile_image.url }}?v={{ request.user.id }}"
                                         alt="Profile" class="w-full h-full object-cover">
                                     {% else %}
-                                    <img src="{% static 'dash/assets/images/icons/user_img.png' %}" alt="Default Profile"
-                                        class="w-full h-full object-cover">
+                                    <img src="{% static 'dash/assets/images/icons/user_img.png' %}"
+                                        alt="Default Profile" class="w-full h-full object-cover">
                                     {% endif %}
                                 </span>
                             </label>

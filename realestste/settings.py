@@ -137,6 +137,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
 LOGIN_URL = "login"
 AUTH_USER_MODEL = "accounts.User"
 LOGOUT_URL = "logout"
