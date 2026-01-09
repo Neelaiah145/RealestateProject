@@ -39,14 +39,14 @@ def login_view(request):
 # =========================
 # DASHBOARDS
 # =========================
-@login_required
-def admin_dashboard(request):
-    return render(request, 'admin/dashboard.html')
+# @login_required
+# def admin_dashboard(request):
+#     return render(request, 'admin/dashboard.html')
 
 
-@login_required
-def user_dashboard(request):
-    return render(request, 'pages/analytics.html')
+# @login_required
+# def user_dashboard(request):
+#     return render(request, 'pages/analytics.html')
 
 
 # =========================
