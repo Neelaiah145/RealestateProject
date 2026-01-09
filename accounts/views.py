@@ -9,7 +9,7 @@ import os
 # =========================
 def redirect_user(user):
     if user.is_superuser:
-        return redirect('main1')
+        return redirect('dashboard')
     else:
         return redirect('analytics')
 
@@ -41,7 +41,7 @@ def login_view(request):
 # =========================
 @login_required
 def admin_dashboard(request):
-    return render(request, 'admin/main1.html')
+    return render(request, 'admin/dashboard.html')
 
 
 @login_required
@@ -69,7 +69,7 @@ def change_superuser_image(request):
                 os.remove(old_path)       
         user.profile_image = request.FILES["profile_image"]
         user.save()
-    return redirect("main1")
+    return redirect("dashboard")
 
 
 
@@ -80,9 +80,14 @@ def change_superuser_image(request):
 
 # ====================================================================================================
 @login_required
-def main(request):
-    return render(request,'admin/main1.html')
+def dashboard_view(request):
+    return render(request,'admin/dashboard.html')
 
 @login_required
 def analytics(request):
     return render(request,'pages/analytics.html',{'page_title':'Analytics'})
+
+
+
+def base(request):
+    return render(request,'base.html')
