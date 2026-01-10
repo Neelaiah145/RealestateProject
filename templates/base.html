@@ -9,9 +9,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <title>Realestate Dashboard</title>
     <link rel="icon" type="image/png" href="{% static 'dash/assets/images/icons/nav_img.png' %}">
+    
     <script src="{% static 'dash/assets/script/unpkg.com/lucide%400.562.0/dist/umd/lucide.js' %}"></script>
     <script src="{% static 'dash/assets/script/cdn.jsdelivr.net/npm/chart.js' %}"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
@@ -28,9 +31,8 @@
                     <div class="w-10 h-10 relative overflow-hidden"><img
                             src="{% static 'dash/assets/images/icons/nav_img.png' %}" alt="pageLogo"
                             class="h-full w-full object-cover" /></div>
-                    <div class="flex flex-col"><a href="index.html" class="text-xl font-bold text-text">Realestate</a>
-
-                        <p class="text-xs text-muted">Dashboard</p>
+                    <div class="flex flex-col"><a href="#" class="text-xl font-bold text-text no-underline">Realestate</a>
+                        <p class="text-xs text-muted">Payment Dashboard</p>
                     </div>
                 </div>
                 <div class="customXl:hidden"><button id="sidebarClose"><i data-lucide="x"></i></button></div>
@@ -99,7 +101,7 @@
                     <li>
                         <a href="#" class="nav-item">
                             <i data-lucide="users"></i>
-                            <span>Customer List</span>
+                            <span>New Customer</span>
                         </a>
                     </li>
 
@@ -281,7 +283,7 @@
                                 <div class="p-4 border-b border-border">
                                     <p class="font-medium text-text">{{ request.user.username }}</p>
                                     <p class="text-sm text-muted">{{ request.user.email }}</p>
-                                   
+
                                     <p class="font-semibold capitalize text-text">Role: {{ request.user.role }}</p>
                                 </div>
 

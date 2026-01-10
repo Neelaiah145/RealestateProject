@@ -12,7 +12,7 @@ def redirect_user(user):
     if user.is_superuser:
         return redirect('dashboard')
     else:
-        return redirect('analytics')
+        return redirect('agents/agent_dashboard')
 
 
 # =========================
@@ -60,7 +60,7 @@ def logout_view(request):
     return redirect('login')
 
 
-# chnage the images
+# chanage the images
 @login_required
 def change_superuser_image(request):
     if not request.user.is_superuser:
@@ -152,3 +152,5 @@ def base(request):
 
 
 # agent dashboard
+def agent_dashboard(request):
+    return render(request,'agents/agent_dashboard.html')

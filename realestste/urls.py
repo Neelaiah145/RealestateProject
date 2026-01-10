@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from accounts.views import   login_view,logout_view,analytics,dashboard_view,change_superuser_image,base,toggle_user_status
-from accounts.views import delete_user
+from accounts.views import delete_user,agent_dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +32,7 @@ urlpatterns = [
     path('base/',base,name='base'),
     path("user/status/<int:user_id>/", toggle_user_status, name="toggle-user"),
     path("user/delete/<int:user_id>/", delete_user, name="delete-user"),
-
+    path('agents/agent_dashboard/',agent_dashboard,name='agents/agent_dashboard')
     
     
     
