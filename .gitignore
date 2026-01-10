@@ -1,11 +1,13 @@
 
-<<<<<<< HEAD
+
 __pycache__/
 *.pyc
-env
-=======
->>>>>>> 206764730a9e6a050cae824d096585bf467cafd1
+
+venv/
+
+.env
+
 db.sqlite3
-.myvenv
+
 
 
